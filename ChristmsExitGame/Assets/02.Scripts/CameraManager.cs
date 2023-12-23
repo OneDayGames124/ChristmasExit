@@ -78,12 +78,38 @@ public class CameraManager : MonoBehaviour
             "Snowman", // 카니 씨는 Door로 설정
             new CameraPositionInfo
             {
-                Position = new Vector3(0,5,2),
-                Rotate = new Vector3(4,-17,0),
+                Position = new Vector3(-0.5f,5.11f,0.62f),
+                Rotate = new Vector3(12.5f,-179.8f,0),
                 MoveNames = new MoveNames
                 {
                     Left = "Door",
                     Right = "Sink",
+                }
+            }
+
+        },
+        {
+            "SnowmanQuiz", // 카니 씨는 Door로 설정
+            new CameraPositionInfo
+            {
+                Position = new Vector3(-0.7f,4.94f,-4.32f),
+                Rotate = new Vector3(1.4f,-180.3f,0),
+                MoveNames = new MoveNames
+                {
+                    Back = "Snowman",
+                }
+            }
+
+        },
+        {
+            "SnowmanBox1", // 카니 씨는 Door로 설정
+            new CameraPositionInfo
+            {
+                Position = new Vector3(-0.7f,4.94f,-4.32f),
+                Rotate = new Vector3(1.4f,-180.3f,0),
+                MoveNames = new MoveNames
+                {
+                    Back = "Snowman",
                 }
             }
 
@@ -97,7 +123,7 @@ public class CameraManager : MonoBehaviour
                 MoveNames = new MoveNames
                 {
                     Left = "Fireplace",
-                    Right = "Sink"
+                    Right = "Snowman"
                 }
             }
 
@@ -106,8 +132,8 @@ public class CameraManager : MonoBehaviour
             "Fireplace", // 카니 씨는 Door로 설정
             new CameraPositionInfo
             {
-                Position = new Vector3(-1,5,1),
-                Rotate = new Vector3(5,-245,0),
+                Position = new Vector3(-3.8f,7.4f,-1.5f),
+                Rotate = new Vector3(15.55f,-268,0),
                 MoveNames = new MoveNames
                 {
                     Left = "Window",
@@ -131,6 +157,19 @@ public class CameraManager : MonoBehaviour
 
         },
         {
+            "CuttonQuiz", // 카니 씨는 Door로 설정
+            new CameraPositionInfo
+            {
+                Position = new Vector3(0,4.9f,3.1f),
+                Rotate = new Vector3(5,-269,0),
+                MoveNames = new MoveNames
+                {
+                    Back = "Window",
+                }
+            }
+
+        },
+        {
             "Closet", // 카니 씨는 Door로 설정
             new CameraPositionInfo
             {
@@ -139,7 +178,7 @@ public class CameraManager : MonoBehaviour
                 MoveNames = new MoveNames
                 {
                     Left = "Bed",
-                    Right = "Fireplace",
+                    Right = "Window",
                 }
             }
 
@@ -173,11 +212,21 @@ public class CameraManager : MonoBehaviour
 
         GetComponent<Camera>().transform.position = _CameraPositionInfoes[CurrentPositionName].Position;
         GetComponent<Camera>().transform.rotation = Quaternion.Euler(_CameraPositionInfoes[CurrentPositionName].Rotate);
+
+        UpdateButtonActive();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   private void UpdateButtonActive()
+   {
+    if (_CameraPositionInfoes[CurrentPositionName].MoveNames.Back == null)
+        ButtonBack.SetActive(false);
+    else ButtonBack.SetActive(true);
+    if (_CameraPositionInfoes[CurrentPositionName].MoveNames.Left == null)
+        ButtonLeft.SetActive(false);
+    else ButtonLeft.SetActive(true);
+    if (_CameraPositionInfoes[CurrentPositionName].MoveNames.Right == null)
+        ButtonRight.SetActive(false);
+    else ButtonRight.SetActive(true);
+    
+   }
 }
